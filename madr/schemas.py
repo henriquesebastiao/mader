@@ -24,3 +24,15 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: str | None = None
+
+
+class RomancistaSchema(BaseModel):
+    nome: str
+
+
+class RomancistaPublic(RomancistaSchema):
+    id: int
+
+
+class RomancistaList(BaseModel):
+    romancistas: list

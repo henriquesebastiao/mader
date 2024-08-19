@@ -7,7 +7,7 @@ from testcontainers.postgres import PostgresContainer
 
 from madr.app import app
 from madr.database import get_session
-from madr.models import User, table_registry
+from madr.models import Romancista, User, table_registry
 from madr.security import get_password_hash
 
 
@@ -18,6 +18,13 @@ class UserFactory(factory.Factory):
     username = factory.Sequence(lambda n: f'test_user_{n}')
     email = factory.LazyAttribute(lambda obj: f'{obj.username}@test.com')
     password = factory.LazyAttribute(lambda obj: f'{obj.username}_password')
+
+
+class RomancistaFactory(factory.Factory):
+    class Meta:
+        model = Romancista
+
+    nome = factory.Sequence(lambda n: f'romancista_{n}')
 
 
 @pytest.fixture
@@ -78,6 +85,17 @@ def other_user(session: Session):
     user.clean_password = password  # Monkey Path
 
     return user
+
+
+@pytest.fixture
+def romancista(session: Session):
+    romancista_db = RomancistaFactory()
+
+    session.add(romancista_db)
+    session.commit()
+    session.refresh(romancista_db)
+
+    return romancista_db
 
 
 @pytest.fixture

@@ -11,3 +11,11 @@ class User:
     username: Mapped[str] = mapped_column(unique=True)
     email: Mapped[str] = mapped_column(unique=True)
     password: Mapped[str]
+
+
+@table_registry.mapped_as_dataclass
+class Romancista:
+    __tablename__ = 'romancistas'
+
+    id: Mapped[int] = mapped_column(primary_key=True, init=False)
+    nome: Mapped[str] = mapped_column(unique=True)

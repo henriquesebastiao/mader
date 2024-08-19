@@ -30,7 +30,7 @@ def test_create_user_already_exist(user, client):
     )
 
     assert response.status_code == HTTPStatus.CONFLICT
-    assert response.json() == {'detail': 'conta já consta no MADR'}
+    assert response.json() == {'detail': 'Conta já consta no MADR'}
 
 
 def test_update_user(user, client, token):

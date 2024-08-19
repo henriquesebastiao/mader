@@ -11,7 +11,6 @@ from madr.security import (
     verify_password,
 )
 from madr.settings import Settings
-from madr.utils import T_Session
 
 settings = Settings()
 
@@ -63,4 +62,4 @@ def test_get_current_user_without_sub():
     token = create_access_token(data={})
 
     with pytest.raises(HTTPException):
-        get_current_user(T_Session, token)
+        get_current_user(token=token)

@@ -6,7 +6,11 @@ from sqlalchemy import select
 from madr.models import User
 from madr.schemas import Message, UserPublic, UserSchema
 from madr.security import get_password_hash
-from madr.utils import T_CurrentUser, T_Session, sanitize
+from madr.utils import (
+    T_CurrentUser,
+    T_Session,
+    sanitize,
+)
 
 router = APIRouter(prefix='/contas', tags=['contas'])
 
@@ -23,7 +27,7 @@ def create_account(user: UserSchema, session: T_Session):
     if db_user:
         raise HTTPException(
             status_code=HTTPStatus.CONFLICT,
-            detail='conta já consta no MADR',
+            detail='Conta já consta no MADR',
         )
 
     db_user = User(
@@ -60,7 +64,7 @@ def update_user(
     if db_user:
         raise HTTPException(
             status_code=HTTPStatus.CONFLICT,
-            detail='conta já consta no MADR',
+            detail='Conta já consta no MADR',
         )
 
     current_user.username = sanitize(user.username)
