@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mader"
+name = "madr"
 version = "0.1.0"
 description = ""
 authors = ["Henrique Sebastião <contato@henriquesebastiao.com>"]
@@ -46,9 +46,9 @@ pythonpath = '.'
 addopts = '-p no:warnings'
 
 [tool.taskipy.tasks]
-run = 'fastapi dev mader/app.py'
+run = 'fastapi dev madr/app.py'
 pre_test = 'task lint'
-test = 'pytest tests --cov=mader -vv'
+test = 'pytest tests --cov=madr -vv'
 post_test = 'coverage html'
 cov = 'firefox-developer-edition htmlcov/index.html'
 lint = 'ruff check .; ruff check . --diff'
