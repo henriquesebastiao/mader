@@ -7,7 +7,7 @@ from testcontainers.postgres import PostgresContainer
 
 from madr.app import app
 from madr.database import get_session
-from madr.models import Romancista, User, table_registry
+from madr.models import Livro, Romancista, User, table_registry
 from madr.security import get_password_hash
 
 
@@ -25,6 +25,15 @@ class RomancistaFactory(factory.Factory):
         model = Romancista
 
     nome = factory.Sequence(lambda n: f'romancista_{n}')
+
+
+class LivroFactory(factory.Factory):
+    class Meta:
+        model = Livro
+
+    ano = 2024
+    titulo = 'titulo_fake'
+    romancista_id = 1
 
 
 @pytest.fixture
@@ -96,6 +105,28 @@ def romancista(session: Session):
     session.refresh(romancista_db)
 
     return romancista_db
+
+
+@pytest.fixture
+def other_romancista(session: Session):
+    romancista_db = RomancistaFactory()
+
+    session.add(romancista_db)
+    session.commit()
+    session.refresh(romancista_db)
+
+    return romancista_db
+
+
+@pytest.fixture
+def livro(session: Session):
+    livro_db = LivroFactory()
+
+    session.add(livro_db)
+    session.commit()
+    session.refresh(livro_db)
+
+    return livro_db
 
 
 @pytest.fixture

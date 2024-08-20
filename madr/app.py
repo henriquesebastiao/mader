@@ -4,7 +4,7 @@ from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy import select
 
 from madr.models import User
-from madr.routers import contas, romancistas
+from madr.routers import contas, livros, romancistas
 from madr.schemas import Message, Token
 from madr.security import (
     create_access_token,
@@ -16,6 +16,7 @@ from madr.utils import T_OAuth2Form, T_Session
 app = FastAPI()
 app.include_router(contas.router)
 app.include_router(romancistas.router)
+app.include_router(livros.router)
 
 
 @app.get('/', response_model=Message)

@@ -36,3 +36,23 @@ class RomancistaPublic(RomancistaSchema):
 
 class RomancistaList(BaseModel):
     romancistas: list
+
+
+class LivroSchema(BaseModel):
+    ano: int
+    titulo: str
+    romancista_id: int
+
+
+class LivroPublic(LivroSchema):
+    id: int
+
+
+class LivroUpdate(BaseModel):
+    ano: int | None = None
+    titulo: str | None = None
+    romancista_id: int | None = None
+
+
+class LivroList(BaseModel):
+    livros: list
