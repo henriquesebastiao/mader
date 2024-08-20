@@ -13,7 +13,6 @@ from madr.schemas import (
 from madr.utils import (
     T_CurrentUser,
     T_Session,
-    sanitize,
 )
 
 router = APIRouter(prefix='/romancistas', tags=['romancistas'])
@@ -27,7 +26,7 @@ def create_romancista(
     session: T_Session,
     current_user: T_CurrentUser,
 ):
-    nome = sanitize(romancista.nome)
+    nome = romancista.nome
     romancisata_db = session.scalar(
         select(Romancista).where(Romancista.nome == nome)
     )
@@ -38,7 +37,7 @@ def create_romancista(
             detail='Romancista já consta no MADR',
         )
 
-    romancisata_db = Romancista(nome=sanitize(romancista.nome))
+    romancisata_db = Romancista(nome=romancista.nome)
 
     session.add(romancisata_db)
     session.commit()
@@ -80,7 +79,7 @@ def update_user(
     current_user: T_CurrentUser,
     session: T_Session,
 ):
-    nome = sanitize(romancista.nome)
+    nome = romancista.nome
 
     romancista_db = session.scalar(
         select(Romancista).where(Romancista.id == romancista_id)
@@ -133,7 +132,7 @@ def get_romancista_by_id(romancista_id: int, session: T_Session):
 @router.get('/', response_model=RomancistaList, status_code=HTTPStatus.OK)
 def get_romancista_by_search(session: T_Session, nome: str | None = None):
     romancistas = session.scalars(
-        select(Romancista).filter(Romancista.nome.contains(sanitize(nome)))
+        select(Romancista).filter(Romancista.nome.contains(nome))
     ).all()
 
     return {'romancistas': romancistas}

@@ -9,7 +9,6 @@ from madr.security import get_password_hash
 from madr.utils import (
     T_CurrentUser,
     T_Session,
-    sanitize,
 )
 
 router = APIRouter(prefix='/contas', tags=['contas'])
@@ -19,8 +18,7 @@ router = APIRouter(prefix='/contas', tags=['contas'])
 def create_account(user: UserSchema, session: T_Session):
     db_user = session.scalar(
         select(User).where(
-            (User.email == user.email)
-            | (User.username == sanitize(user.username))
+            (User.email == user.email) | (User.username == user.username)
         )
     )
 
@@ -31,7 +29,7 @@ def create_account(user: UserSchema, session: T_Session):
         )
 
     db_user = User(
-        username=sanitize(user.username),
+        username=user.username,
         email=user.email,
         password=get_password_hash(user.password),
     )
@@ -67,7 +65,7 @@ def update_user(
             detail='Conta já consta no MADR',
         )
 
-    current_user.username = sanitize(user.username)
+    current_user.username = user.username
     current_user.email = user.email
     current_user.password = get_password_hash(user.password)
 

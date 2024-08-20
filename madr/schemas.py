@@ -1,4 +1,10 @@
-from pydantic import BaseModel, EmailStr
+from typing import Annotated
+
+from pydantic import AfterValidator, BaseModel, EmailStr
+
+sanitized = Annotated[
+    str, AfterValidator(lambda x: ' '.join(str(x).split()).lower())
+]
 
 
 class Message(BaseModel):
@@ -6,14 +12,14 @@ class Message(BaseModel):
 
 
 class UserSchema(BaseModel):
-    username: str
+    username: sanitized
     email: EmailStr
     password: str
 
 
 class UserPublic(BaseModel):
     id: int
-    username: str
+    username: sanitized
     email: EmailStr
 
 
@@ -27,7 +33,7 @@ class TokenData(BaseModel):
 
 
 class RomancistaSchema(BaseModel):
-    nome: str
+    nome: sanitized
 
 
 class RomancistaPublic(RomancistaSchema):
@@ -40,7 +46,7 @@ class RomancistaList(BaseModel):
 
 class LivroSchema(BaseModel):
     ano: int
-    titulo: str
+    titulo: sanitized
     romancista_id: int
 
 

@@ -11,7 +11,7 @@ from madr.schemas import (
     LivroUpdate,
     Message,
 )
-from madr.utils import T_CurrentUser, T_Session, sanitize
+from madr.utils import T_CurrentUser, T_Session
 
 router = APIRouter(prefix='/livros', tags=['livros'])
 
@@ -20,7 +20,7 @@ router = APIRouter(prefix='/livros', tags=['livros'])
 def create_livro(
     livro: LivroSchema, current_user: T_CurrentUser, session: T_Session
 ):
-    titulo = sanitize(livro.titulo)
+    titulo = livro.titulo
 
     livro_db = session.scalar(select(Livro).where(Livro.titulo == titulo))
 
@@ -81,7 +81,7 @@ def update_livro(
         )
 
     if livro.titulo:
-        titulo = sanitize(livro.titulo)
+        titulo = livro.titulo
 
         title_already_exists = session.scalar(
             select(Livro).where(Livro.titulo == titulo)
@@ -130,7 +130,7 @@ def get_livro_by_search(
     query = select(Livro)
 
     if titulo:
-        query = query.filter(Livro.titulo.contains(sanitize(titulo)))
+        query = query.filter(Livro.titulo.contains(titulo))
     if ano:
         query = query.filter(Livro.ano == ano)
 
