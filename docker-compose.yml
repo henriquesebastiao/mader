@@ -1,0 +1,28 @@
+services:
+  postgres-madr:
+    container_name: postgres-madr
+    image: postgres:16.4-alpine
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      - PGPORT=5436
+    ports:
+      - "5436:5436"
+  
+  fastapi-madr:
+    container_name: fastapi-madr
+    image: madr_app
+    entrypoint: ./entrypoint.sh
+    volumes:
+      - ./madr:/madr
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8093:8000"
+    depends_on:
+      - postgres-madr
+    env_file:
+      - .env
