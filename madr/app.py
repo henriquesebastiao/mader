@@ -5,7 +5,7 @@ from sqlalchemy import select
 
 from madr.models import User
 from madr.routers import contas, livros, romancistas
-from madr.schemas import Message, Token
+from madr.schemas import Token
 from madr.security import (
     create_access_token,
     get_current_user,
@@ -13,15 +13,26 @@ from madr.security import (
 )
 from madr.utils import T_OAuth2Form, T_Session
 
-app = FastAPI()
+description = """
+Esta API foi desenvolvida como  projeto final do curso [FastAPI do Zero](https://fastapidozero.dunossauro.com/)
+#### Documentação mais legível: [Redoc](https://api.henriquesebastiao.com/redoc)
+"""
+
+app = FastAPI(
+    title='Meu Acervo Digital de Romances (MADR)',
+    version='dev',
+    docs_url='/',
+    description=description,
+    contact={
+        'name': 'Henrique Sebastião',
+        'email': 'contato@henriquesebastiao.com',
+        'url': 'https://github.com/henriquesebastiao',
+    },
+)
+
 app.include_router(contas.router)
 app.include_router(romancistas.router)
 app.include_router(livros.router)
-
-
-@app.get('/', response_model=Message)
-def read_root():
-    return {'message': 'Meu Acervo Digital de Romances'}
 
 
 @app.post('/token', response_model=Token)
