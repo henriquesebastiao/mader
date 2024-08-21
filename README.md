@@ -5,7 +5,7 @@
 [![codecov](https://img.shields.io/badge/python-3.12.4-blue)]()
 [![codecov](https://img.shields.io/badge/fastapi-0.112.1-blue)]()
 
-Link do deploy: [http://server.henriquesebastiao.com:8093/docs](http://server.henriquesebastiao.com:8093/docs)
+Link do deploy: [https://madr.henriquesebastiao.com/](https://madr.henriquesebastiao.com/)
 
 Projeto final do curso [FastAPI do Zero](https://fastapidozero.dunossauro.com/)
 
