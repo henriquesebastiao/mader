@@ -2,8 +2,9 @@
 
 [![CI](https://github.com/henriquesebastiao/madr/actions/workflows/ci.yml/badge.svg)](https://github.com/henriquesebastiao/madr/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/henriquesebastiao/madr/graph/badge.svg?token=h1LHjY5hZb)](https://codecov.io/gh/henriquesebastiao/madr)
-[![codecov](https://img.shields.io/badge/python-3.12.4-blue)]()
-[![codecov](https://img.shields.io/badge/fastapi-0.112.1-blue)]()
+[![status](https://uptime.henriquesebastiao.com/api/badge/24/status)]()
+[![python](https://img.shields.io/badge/python-3.12.4-blue)]()
+[![fastapi](https://img.shields.io/badge/fastapi-0.112.1-blue)]()
 
 Link do deploy: [https://madr.henriquesebastiao.com/](https://madr.henriquesebastiao.com/)
 
