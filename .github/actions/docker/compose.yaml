@@ -1,9 +1,0 @@
-services:
-  test:
-    entrypoint: .github/actions/docker/entrypoint.sh
-    build:
-      context: .
-    environment:
-      SECRET_KEY: fhgreihgfioeubgrfoiearubgieu
-      ACCESS_TOKEN_EXPIRE_MINUTES: 30
-      ALGORITHM: HS256
