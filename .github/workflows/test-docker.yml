@@ -7,7 +7,7 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     env:
-      COMPOSE_FILE: .github/actions/docker/compose.yaml
+      COMPOSE_FILE: compose.yaml
     
     steps:
     - name: Checkout code
